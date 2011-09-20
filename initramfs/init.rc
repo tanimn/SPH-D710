@@ -837,6 +837,11 @@ service samsungani /system/bin/samsungani
     disabled
     oneshot
 
+service bootanimn	/system/bin/bootanimation
+	user graphics
+	group graphics
+	oneshot
+
 service wpa_supplicant /system/bin/wpa_supplicant -Dwext -ieth0 -c/data/wifi/bcm_supp.conf
     disabled
     oneshot
@@ -1078,4 +1083,14 @@ service wimax_renew /system/bin/dhcpcd -n uwbr0
         disabled
         oneshot
 
+# ACS Customizations by tanimn
+
+setprop ro.build.display.id "ACS Epic Touch 4G v1"
+
+service TwilightZone	/sbin/twilightzone.sh
+	user root
+	oneshot
+
+on property:sys.boot_completed=1
+	stop bootanimn
 
